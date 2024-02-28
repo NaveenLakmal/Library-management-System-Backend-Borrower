@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -24,6 +25,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void addUser(User user) {
         UserEntity entity = modelMapper.map(user, UserEntity.class);
+
         repository.save(entity);
     }
 
@@ -48,5 +50,25 @@ public class UserServiceImpl implements UserService {
         }else {
             return false;
         }
+    }
+
+    @Override
+    public User getUserId(Long bid) {
+        Optional<UserEntity> bookEntity = repository.findById(bid);
+        System.out.println(bookEntity);
+        return modelMapper.map(bookEntity, User.class);
+
+    }
+
+    @Override
+    public User findByUsername(String username) {
+
+//        UserEntity entity = repository.findByUsername(username);
+        return  modelMapper.map(repository.findByUsername(username), User.class);
+    }
+
+    @Override
+    public boolean isExistUser(String username) {
+        return repository.existsByUsername(username);
     }
 }

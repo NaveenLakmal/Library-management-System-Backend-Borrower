@@ -29,4 +29,22 @@ public class BorrowerController {
         service.deleteBook(bid);
     }
 
+    @GetMapping("/find-by-bid/{bid}")
+    public User getUserId(@PathVariable Long bid){
+        return service.getUserId(bid);
+    }
+
+    @GetMapping("/find-by-username/{username}")
+    public User getUserName(@PathVariable String username){
+        return service.findByUsername(username);
+    }
+
+    @GetMapping("/is-exist-user/{username}")
+    public boolean isExistUser(@PathVariable String username){
+
+        boolean existUser = service.isExistUser(username);
+        System.out.println(existUser);
+        return existUser;
+    }
+
 }

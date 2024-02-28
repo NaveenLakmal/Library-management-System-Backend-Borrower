@@ -10,4 +10,10 @@ public interface UserService {
     List<User>getAllUser();
 
     boolean deleteBook(Long bid);
+
+    User getUserId(Long bid);
+
+    User findByUsername(String username);
+
+    boolean isExistUser(String username);
 }
