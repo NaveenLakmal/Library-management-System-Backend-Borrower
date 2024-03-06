@@ -10,6 +10,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/user")
 @RequiredArgsConstructor
+@CrossOrigin
 public class BorrowerController {
 
     final UserService service;
@@ -43,7 +44,7 @@ public class BorrowerController {
     public boolean isExistUser(@PathVariable String username){
 
         boolean existUser = service.isExistUser(username);
-        System.out.println(existUser);
+
         return existUser;
     }
 

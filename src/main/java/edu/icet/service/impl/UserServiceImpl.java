@@ -6,7 +6,7 @@ import edu.icet.repository.UserRepository;
 import edu.icet.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.stereotype.Repository;
+
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -17,7 +17,7 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
-    List<User> list = new ArrayList<>();
+
 
     final ModelMapper modelMapper;
     final UserRepository repository;
@@ -31,23 +31,26 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> getAllUser() {
+        List<User> list = new ArrayList<>();
+
         Iterable<UserEntity> iterbleList = repository.findAll();
         Iterator<UserEntity> iteratorList = iterbleList.iterator();
 
-        while (iteratorList.hasNext()){
+        while (iteratorList.hasNext()) {
             UserEntity entity = iteratorList.next();
             User user = modelMapper.map(entity, User.class);
             list.add(user);
         }
         return list;
+
     }
 
     @Override
     public boolean deleteBook(Long bid) {
-        if(repository.existsById(bid)){
+        if (repository.existsById(bid)) {
             repository.deleteById(bid);
             return true;
-        }else {
+        } else {
             return false;
         }
     }
@@ -55,7 +58,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUserId(Long bid) {
         Optional<UserEntity> bookEntity = repository.findById(bid);
-        System.out.println(bookEntity);
+
         return modelMapper.map(bookEntity, User.class);
 
     }
@@ -63,8 +66,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findByUsername(String username) {
 
-//        UserEntity entity = repository.findByUsername(username);
-        return  modelMapper.map(repository.findByUsername(username), User.class);
+
+        return modelMapper.map(repository.findByUsername(username), User.class);
     }
 
     @Override
